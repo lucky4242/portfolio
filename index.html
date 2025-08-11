@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Myportfolio</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="nav">
+      <div class="nav-container">
+        <button class="nav-toggle" aria-label="toggle navigation">☰</button>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#blogs">Blogs</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <header id="top" class="hero">
+      <div class="container">
+        <div class="intro">
+          <div class="profile-wrapper">
+            <img
+              src="images/logo.png"
+              alt="Lucky's Photo"
+              class="profile-pic"
+            />
+          </div>
+          <div class="headline">
+            <h1>Lucky Opuama</h1>
+            <h3 class="subtitle" id="typewriter"></h3>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section id="about" class="section">
+        <h2>About</h2>
+        <div class="about-flex">
+          <div class="about-text">
+            <p>Hi, I’m Lucky</p>
+            <p>
+              I’m a software developer and technical author specializing in PHP,
+              JavaScript, and database integrations. Based in Nigeria, I’ve been
+              developing web applications and writing technical content for over
+              five years.
+            </p>
+
+            <p>
+              My focus is on simplifying complex technology. I build
+              integrations with Laravel and Twilio, create self-service tools,
+              and write clear, developer-focused content that helps others work
+              more efficiently. My work covers multi-channel notifications,
+              secure authentication flows, and practical, hands-on tutorials.
+            </p>
+            <p>
+              I love solving problems with the knowledge I’ve gained while
+              continually learning more aand I take pride in explaining
+              solutions in a way that someone can put into action immediately.
+              if you'd like to work together,
+              <a href="#contact" rel="noopener">please reach out</a>.
+            </p>
+          </div>
+          <div class="about-image">
+            <img src="images/lucky.jpg" alt="Lucky Opuama" />
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="section">
+        <h2>Projects</h2>
+        <div id="projects-container" class="cards"></div>
+        <div id="projects-pagination" class="pagination"></div>
+      </section>
+
+      <section id="blogs" class="section">
+        <h2>Blogs</h2>
+        <div id="blogs-container" class="blog-list"></div>
+        <div id="blogs-pagination" class="pagination"></div>
+      </section>
+
+      <section id="contact" class="contact">
+        <div class="container">
+          <h2>Contact Me</h2>
+
+          <!-- Contact form -->
+          <form
+            action="https://formspree.io/f/yourFormID"
+            method="POST"
+            class="contact-form"
+          >
+            <input
+              type="text"
+              name="message"
+              placeholder="Type your message..."
+              required
+            />
+            <button type="submit">Send</button>
+          </form>
+
+          <!-- Social icons -->
+          <div class="social-icons">
+            <a href="https://x.com/OpuamaL88972" target="_blank">
+              <img src="images/twitter.svg" alt="Twitter" />
+            </a>
+            <a href="mailto:opuamalucky42@gmail.com">
+              <img src="images/gmail.svg" alt="Email" />
+            </a>
+            <a href="linkedin.com/in/lucky-opuama-6902241aa" target="_blank">
+              <img src="images/linkedin.svg" alt="LinkedIn" />
+            </a>
+            <a href="https://github.com/lucky4242" target="_blank">
+              <img src="images/github.svg" alt="GitHub" />
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>© 2025 Lucky Opuama. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      // mobile nav toggle
+      const toggle = document.querySelector('.nav-toggle');
+      const links = document.querySelector('.nav-links');
+      toggle.addEventListener('click', () => {
+        links.classList.toggle('active');
+      });
+
+      // smooth scroll
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            window.scrollTo({
+              top: target.offsetTop - 60,
+              behavior: 'smooth',
+            });
+          }
+          if (links.classList.contains('active')) {
+            links.classList.remove('active');
+          }
+        });
+      });
+      const texts = [
+        "I'm a Computer Sicientist by degree.",
+        ' A Technical Writer.',
+        'A Software Developer.',
+        ' And a Database Administrator.',
+      ];
+
+      let count = 0;
+      let index = 0;
+      let currentText = '';
+      let letter = '';
+
+      function type() {
+        if (count === texts.length) {
+          count = 0;
+        }
+        currentText = texts[count];
+        letter = currentText.slice(0, ++index);
+
+        document.getElementById('typewriter').textContent = letter;
+
+        if (letter.length === currentText.length) {
+          setTimeout(() => {
+            index = 0;
+            count++;
+            type();
+          }, 1500); // pause before next text
+        } else {
+          setTimeout(type, 100);
+        }
+      }
+
+      type();
+      // Data (extend these arrays with more items)
+      const projectsData = [
+        {
+          title: 'Post-call Transcription System',
+          description:
+            'An application that receives Twilio call recordings and automatically creates searchable transcriptions after each call.',
+          url: 'https://github.com/lucky4242/post-call-transcrption-system',
+        },
+        {
+          title: 'Social Authentication Providers with Laravel Passport',
+          description:
+            'This project integrates Laravel Passport for API authentication with social authentication providers (e.g., Google, Facebook, GitHub, etc.) to provide a secure and flexible authentication system.',
+          url: 'https://github.com/lucky4242/socialauth',
+        },
+        {
+          title: 'Data_visualization',
+          description:
+            'This project demonstrates how to integrate D3.js with Laravel to create interactive and dynamic data visualizations.',
+          url: 'https://github.com/lucky4242/Data_visualization',
+        },
+        {
+          title: 'Drag and Drop Image With File Upload in Laravel and React',
+          description:
+            'A modern Drag and Drop Image Upload system built with Laravel as the backend API and React for the frontend UI.',
+          url: 'https://github.com/lucky4242/File_upload',
+        },
+        {
+          title: 'Twilio 2fa',
+          description:
+            'secure your Laravel apps by implementing SMS-based 2FA using Twilio and Laravel Fortify.',
+          url: 'https://github.com/lucky4242/twilio-2fa',
+        },
+        {
+          title: 'Text to speech',
+          description:
+            'create a simple application and convert our text to speech using a Google API.',
+          url: 'https://github.com/lucky4242/Text-speach',
+        },
+        {
+          title: 'Patient Reminder Application',
+          description:
+            'creates an application that reminds patient on thier daily medical routine.',
+          url: 'https://github.com/lucky4242/patient_reminder_application',
+        },
+        {
+          title: 'Student Identification System',
+          description: 'Built a webapp student identification system .',
+          url: 'https://github.com/lucky4242/student_id',
+        },
+        {
+          title: 'Mindmapp app',
+          description: 'Step-by-step guide on how to build a this mindmap.',
+          url: 'https://github.com/lucky4242/mindmap-app',
+        },
+      ];
+
+      const blogsData = [
+        {
+          title:
+            'Secure Your Laravel Apps with Two-Factor Authentication and Laravel Fortify',
+          intro:
+            'Security has always been a major challenge in web applications, especially with user authentication. With the increasing number of cyber threats, relying solely on passwords is no longer enough. Attackers can easily compromise weak or reused passwords through phishing, brute force attacks, or data breaches. To enhance security, Two-Factor Authentication (2FA) has become a widely adopted solution.',
+          url: 'https://www.twilio.com/en-us/blog/developers/tutorials/secure-your-laravel-apps-with-two-factor-authentication-and-laravel-fortify',
+          published: 'July 15, 2025',
+        },
+        {
+          title:
+            'How to Integrate Laravel Passport with Social Authentication Providers',
+          intro:
+            'Most systems today require authentication to access their resources, ensuring only authenticated users can interact with sensitive data. As security becomes a top priority, integrating strong authentication techniques like OAuth or API token-based authentication is very important.',
+          url: 'https://www.twilio.com/en-us/blog/developers/community/integrate-laravel-passport-with-social-authentication-providers',
+          published: 'April 08, 2025',
+        },
+        {
+          title: 'Laravel Passport vs Sanctum: Practical Comparison',
+          intro:
+            'It is no longer news that security is an essential factor when developing an application. As applications evolve, so do their authentication needs. This is why Laravel offers your application two important “locks and keys”: Laravel Passport and Laravel Sanctum.',
+          url: 'https://www.twilio.com/en-us/blog/developers/community/laravel-sanctum-vs-passport',
+          published: 'March 25, 2025',
+        },
+        {
+          title:
+            'Build a Post-call Transcription System in Laravel with Twilio',
+          intro:
+            'This tutorial will show you how to develop a post-call transcription system in Laravel using Twilios powerful Programmable Voice API. By the end of this tutorial, you will have a fully operational system for recording and transcribing phone calls, with the transcriptions safely stored in a database.',
+          url: 'https://www.twilio.com/en-us/blog/developers/community/build-post-call-transcription-system-laravel',
+          published: 'December 17, 2024',
+        },
+        {
+          title: 'Create Dynamic Data Visualizations in Laravel with D3.js',
+          intro:
+            'In todays fast-paced technological environment, where data flows in from every direction, it is more important than ever to have accessible ways to view and understand this data. One effective way to do so is with dynamic data visualizations.',
+          url: 'https://www.twilio.com/en-us/blog/developers/community/create-dynamic-data-visualisations-laravel-d3js',
+          published: 'October 23, 2024',
+        },
+        {
+          title:
+            'How to Implement Drag and Drop Image With File Upload in Laravel and React',
+          intro:
+            'File and image uploads are essential functionality for many applications, ensuring a smooth and user-friendly experience. Whether you are creating a photo-sharing website, a document management system, or any other application that works with dynamically generated content, having an intuitive file upload mechanism is essential.',
+          url: 'https://www.twilio.com/en-us/blog/developers/community/implement-drag-drop-image-file-upload-laravel-react',
+          published: 'September 24, 2024',
+        },
+        {
+          title: 'How to Build a Chat App with React, Strapi & Firebase',
+          intro:
+            'Building a chat application with React, Strapi, and Firebase combines React frontend strength with Strapi backend data management skills, Firebase authentication and messaging functionality. In this tutorial, you will learn how to create a Strapi chat app, integrate Firebase for user authentication, and get real-time updates.',
+          url: 'https://strapi.io/blog/how-to-build-a-chat-app-with-react-strapi-and-firebase',
+          published: 'April 5, 2024',
+        },
+        {
+          title: 'Runtime Showdown: Bun vs. Node vs. Deno - Which One Wins?',
+          intro:
+            'JavaScript and TypeScript have made it possible for developers in a range of fields to create dynamic and interactive programs. In today’s software development world, these languages are now indispensable',
+          url: 'https://blog.openreplay.com/bun-vs-node-vs-deno/',
+          published: 'Dec 20, 2023 ',
+        },
+        {
+          title: 'Build a Mind-Mapping App with React Flow',
+          intro:
+            'A mind map is a visual representation of thoughts, concepts, information, or tasks grouped around a common theme or issue. A mind map application is a software application that allows you to create, visualize, and organize your thoughts, ideas, and information as a mind map. This article will show you how to implement a mind-mapping app of your own.',
+          url: 'https://blog.openreplay.com/build-a-mind-mapping-app-with-react-flow/',
+          published: 'Nov 14, 2023',
+        },
+        {
+          title: 'Accessibility, design, and the CSS visually-hidden class',
+          intro:
+            'Good communication can frequently lead to a compromise or resolution that meets aesthetic and usability requirements. However, there are situations when workarounds are required to produce a solution that fits both requirements. This article will show how to use the visually-hidden class to keep the same visual look but work efficiently with assistive technology.',
+          url: 'https://blog.openreplay.com/accessibility-design-and-the-css-visually-hidden-class/',
+          published: 'Aug 17, 2023',
+        },
+        {
+          title: 'Static vs. Dynamic Websites',
+          intro:
+            'Learn how to build a seamless drag-and-drop image uploader combining Laravel’s backend power with React’s interactive UI—complete with previews and error handling.',
+          url: 'https://blog.openreplay.com/static-vs-dynamic-websites/',
+          published: 'Apr 13, 2023 ',
+        },
+        {
+          title:
+            'Next.js vs SvelteKit: Which One is Better for Your Next Strapi App?',
+          intro:
+            'Web development has evolved tremendously over the past decade, with the emergence of modern frameworks that simplify the development process and improve performance. Two such frameworks are Next.js and SvelteKit, which have gained significant popularity in recent years. When developing Strapi applications, choosing the proper framework can ensure optimal performance and seamless user experience.',
+          url: 'https://strapi.io/blog/nextjs-vs-sveltekit-which-one-is-better-for-your-next-strapi-app',
+          published: 'April 12, 2023',
+        },
+        {
+          title: 'How to Build a Meme Generator App with React and Strapi v4',
+          intro:
+            'React and Strapi are two popular technologies in the developer ecosystem, and they make a powerful combination for building applications.',
+          url: 'https://strapi.io/blog/how-to-build-a-meme-generator-with-react-and-strapi-v4',
+          published: 'April 7, 2023',
+        },
+        {
+          title: 'Building a Job Nina with Sapper, Strapi and Netlify',
+          intro:
+            'This article will show you how to build a job search platform using Sapper with Strapi as database and then deploy it to Netlify.',
+          url: 'https://strapi.io/blog/building-a-job-nina-with-sapper-strapi-v4-and-netlify',
+          published: 'October 3, 2022',
+        },
+        {
+          title: 'Text to Speech Powered by Google Api',
+          intro:
+            'In this tutorial, we will create a simple webpage and convert our text to speech using a Google API. ',
+          url: 'https://dev.to/fortune42/text-to-speech-powered-by-google-api-44ce',
+          published: 'Mar 7, 2022',
+        },
+        {
+          title:
+            'How Implement Two-Factor Authentication with Node.JS and otplib',
+          intro:
+            'This article will show you how to simply integrate 2FA in your Node.js applications with otplib, providing users with effective security and peace of mind. ',
+          url: 'https://dev.to/fortune42/how-implement-two-factor-authentication-with-nodejs-and-otplib-2mlk',
+          published: 'Aug 5, 2024',
+        },
+        {
+          title: 'Top 5 Docker Container Monitoring Tools in 2024',
+          intro:
+            'Monitoring tools assist DevOps teams in swiftly detecting and resolving performance issues. ',
+          url: 'https://dev.to/fortune42/top-5-docker-container-monitoring-tools-in-2024-4kkd',
+          published: ' Mar 24, 2024',
+        },
+        {
+          title: 'Docker vs Kubernetes: What is Your Comment?',
+          intro:
+            'Docker and Kubernetes are two standout technologies that offer distinct solutions for streamlining application development and deployment procedures. ',
+          url: 'https://dev.to/fortune42/docker-vs-kubernetes-whats-your-comment-1pjb',
+          published: 'Mar 22, 2024',
+        },
+        {
+          title: 'Improving Style Recalculation Speed with CSS',
+          intro:
+            'In the fast-paced global landscape of modern web development, the performance of a website is frequently the first and last impression it leaves on its users.  ',
+          url: 'https://dev.to/fortune42/improving-style-recalculation-speed-with-css-27pl',
+          published: 'Mar 21, 2024',
+        },
+        {
+          title:
+            'Deep dive into React: State Management Types and its Importance',
+          intro:
+            'State management is a key concept in React, a popular JavaScript library for creating user interfaces. ',
+          url: 'https://dev.to/fortune42/deep-dive-into-react-state-management-types-and-its-importance-2nn',
+          published: ' Apr 23, 2023',
+        },
+        {
+          title: 'How to Create a Yearly Count Down Timer',
+          intro:
+            'Countdown timers have been around since the early twentieth. The development of digital electronics in the 1950s resulted in the development of electronic countdown timers.',
+          url: 'https://dev.to/fortune42/how-to-create-a-yearly-count-down-timer-1d60',
+          published: 'Apr 7, 2023',
+        },
+        {
+          title: 'Vanilla XMLHttpRequest method without using jquery',
+          intro:
+            'Ajax is short for "Asynchronous JavaScript and XML", it is a set of web development techniques that uses various web technologies on the client-side to create asynchronous web applications without interfering with the display and behaviour of the existing page. ',
+          url: 'https://dev.to/fortune42/vanilla-xmlhttprequest-method-without-using-jquery-3d7n',
+          published: 'Oct 23, 2021',
+        },
+        {
+          title: 'CREATE MYSQL CONNECTION IN PHP',
+          intro:
+            'XAMPP is the most popular software package which is used to set up a PHP development environment for web services by providing all the required software components.',
+          url: 'https://dev.to/fortune42/create-mysql-connection-in-php-3hen',
+          published: 'Jul 23, 2021',
+        },
+      ];
+
+      // Pagination utility
+      function paginate(items, page = 1, perPage = 3) {
+        const total = items.length;
+        const totalPages = Math.ceil(total / perPage);
+        const start = (page - 1) * perPage;
+        const end = start + perPage;
+        return {
+          page,
+          perPage,
+          total,
+          totalPages,
+          data: items.slice(start, end),
+        };
+      }
+
+      // Renderers
+      function renderProjects(page = 1) {
+        const container = document.getElementById('projects-container');
+        const paginationEl = document.getElementById('projects-pagination');
+        const { data, totalPages } = paginate(projectsData, page, 3);
+        container.innerHTML = '';
+        data.forEach((p) => {
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.innerHTML = `
+          <div>
+            <h3>${p.title}</h3>
+          
+            <p>${p.description}</p>
+          </div>
+          <div>
+            <a class="button" href="${p.url}" target="_blank" rel="noopener">View Details</a>
+          </div>
+        `;
+          container.appendChild(card);
+        });
+        renderPagination(paginationEl, page, totalPages, renderProjects);
+      }
+
+      function renderBlogs(page = 1) {
+        const container = document.getElementById('blogs-container');
+        const paginationEl = document.getElementById('blogs-pagination');
+        const { data, totalPages } = paginate(blogsData, page, 3);
+        container.innerHTML = '';
+        data.forEach((b) => {
+          const article = document.createElement('article');
+          article.className = 'blog-card';
+          article.innerHTML = `
+          <div class="blog-content">
+            <h3><a href="${b.url}" target="_blank" rel="noopener">${b.title}</a></h3>
+            <p class="meta">Published: ${b.published}</p>
+            <p class="intro">${b.intro}</p>
+          </div>
+          <div class="blog-action">
+            <a class="read-more" href="${b.url}" target="_blank" rel="noopener">Read more →</a>
+          </div>
+        `;
+          container.appendChild(article);
+        });
+        renderPagination(paginationEl, page, totalPages, renderBlogs);
+      }
+
+      function renderPagination(wrapper, current, total, onPageClick) {
+        wrapper.innerHTML = '';
+        if (total <= 1) return;
+        const prev = document.createElement('button');
+        prev.textContent = '← Prev';
+        prev.disabled = current === 1;
+        prev.className = 'page-btn';
+        prev.addEventListener('click', () => onPageClick(current - 1));
+        wrapper.appendChild(prev);
+
+        for (let i = 1; i <= total; i++) {
+          const btn = document.createElement('button');
+          btn.textContent = i;
+          btn.className = 'page-btn' + (i === current ? ' active' : '');
+          if (i === current) btn.setAttribute('aria-current', 'page');
+          btn.addEventListener('click', () => onPageClick(i));
+          wrapper.appendChild(btn);
+        }
+
+        const next = document.createElement('button');
+        next.textContent = 'Next →';
+        next.disabled = current === total;
+        next.className = 'page-btn';
+        next.addEventListener('click', () => onPageClick(current + 1));
+        wrapper.appendChild(next);
+      }
+
+      // Initial render
+      renderProjects(1);
+      renderBlogs(1);
+    </script>
+  </body>
+</html>
